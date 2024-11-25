@@ -1,5 +1,5 @@
 class AppString {
-  static String appname = "TO-DO List";
+  static String appname = "Uptodo";
   static String back = "Back";
   static String skip = "Skip";
   static String next = "Next";
