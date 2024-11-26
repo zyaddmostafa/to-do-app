@@ -31,4 +31,5 @@ class AppString {
   static String taskcompleted = 'Task Completed';
   static String taskdeleted = 'Deleted Task';
   static String cancle = 'Cancle';
+  static String onBoardingKey = 'OnBoarding';
 }

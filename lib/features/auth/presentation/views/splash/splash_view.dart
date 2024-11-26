@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do_app/core/database/cached_helper.dart';
+import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/features/auth/presentation/views/onbordering_screens/onbordering_screens.dart';
+import 'package:to_do_app/features/task/presentation/views/home/home_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -14,9 +17,16 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   void navigator() {
+    bool? isOnboarding =
+        getIt<CachedHelper>().getdata(key: AppString.onBoardingKey) ?? false;
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (_) => const OnborderingScreens()));
+      if (isOnboarding == true) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => const HomeView()));
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => const OnborderingScreens()));
+      }
     });
   }
 

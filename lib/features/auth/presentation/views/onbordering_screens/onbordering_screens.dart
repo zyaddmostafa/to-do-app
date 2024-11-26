@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:to_do_app/core/database/cached_helper.dart';
+import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/features/auth/data/model/onborder_model.dart';
@@ -116,11 +118,19 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                   Theme.of(context).elevatedButtonTheme.style!,
                               onPressed: () {
                                 if (index == 2) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const HomeView()),
-                                  );
+                                  getIt<CachedHelper>()
+                                      .savedata(
+                                          key: AppString.onBoardingKey,
+                                          value: true)
+                                      .then((value) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomeView()),
+                                    );
+                                    print('onbordering $value');
+                                  });
                                 } else {
                                   controller.nextPage(
                                       duration:
