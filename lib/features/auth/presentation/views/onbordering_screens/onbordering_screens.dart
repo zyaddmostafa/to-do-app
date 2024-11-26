@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/features/auth/data/model/onborder_model.dart';
+import 'package:to_do_app/features/task/presentation/views/home/home_view.dart';
 
 class OnborderingScreens extends StatefulWidget {
   const OnborderingScreens({super.key});
@@ -39,15 +40,10 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                       2,
                                     );
                                   },
-                                  child: Text(
-                                    AppString.skip,
-                                    style: TextStyle(
-                                      fontFamily: GoogleFonts.lato().fontFamily,
-                                      fontSize: 16,
-                                      color: AppColor.secondaryColor
-                                          .withOpacity(0.44),
-                                    ),
-                                  ),
+                                  child: Text(AppString.skip,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall),
                                 ),
                               )
                             : const SizedBox(
@@ -82,12 +78,7 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                         //title
                         Text(
                           OnborderModel.onborderList[index].title,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.lato().fontFamily,
-                            fontSize: 32,
-                            fontWeight: FontWeight.w700,
-                            color: AppColor.secondaryColor,
-                          ),
+                          style: Theme.of(context).textTheme.displayLarge,
                         ),
                         const SizedBox(
                           height: 40,
@@ -95,12 +86,7 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                         //description
                         Text(
                           OnborderModel.onborderList[index].subtitle,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.lato().fontFamily,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.secondaryColor,
-                          ),
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
                         const SizedBox(
                           height: 90,
@@ -119,25 +105,22 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                     },
                                     child: Text(
                                       AppString.back,
-                                      style: TextStyle(
-                                        fontFamily:
-                                            GoogleFonts.lato().fontFamily,
-                                        fontSize: 16,
-                                        color: AppColor.secondaryColor
-                                            .withOpacity(0.44),
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall,
                                     ),
                                   )
                                 : Container(),
                             ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColor.primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
+                              style:
+                                  Theme.of(context).elevatedButtonTheme.style!,
                               onPressed: () {
                                 if (index == 2) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const HomeView()),
+                                  );
                                 } else {
                                   controller.nextPage(
                                       duration:
@@ -149,12 +132,8 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                 index != 2
                                     ? AppString.next
                                     : AppString.getstarted,
-                                style: TextStyle(
-                                  fontFamily: GoogleFonts.lato().fontFamily,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.secondaryColor,
-                                ),
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
                               ),
                             ),
                           ],
