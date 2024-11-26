@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
-import 'package:to_do_app/features/task/presentation/views/onbordering_screens/onbordering_screens.dart';
+import 'package:to_do_app/features/auth/presentation/views/onbordering_screens/onbordering_screens.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -15,8 +15,8 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   void navigator() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => OnborderingScreens()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => const OnborderingScreens()));
     });
   }
 
