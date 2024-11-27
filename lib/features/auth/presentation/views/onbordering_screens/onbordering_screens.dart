@@ -5,6 +5,9 @@ import 'package:to_do_app/core/database/cached_helper.dart';
 import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
+import 'package:to_do_app/core/utils/navigate_helper.dart';
+import 'package:to_do_app/core/widgets/custom_elevated_button.dart';
+import 'package:to_do_app/core/widgets/custom_text_button.dart';
 import 'package:to_do_app/features/auth/data/model/onborder_model.dart';
 import 'package:to_do_app/features/task/presentation/views/home/home_view.dart';
 
@@ -36,17 +39,13 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                         index != 2
                             ? Align(
                                 alignment: Alignment.centerLeft,
-                                child: TextButton(
-                                  onPressed: () {
-                                    controller.jumpToPage(
-                                      2,
-                                    );
-                                  },
-                                  child: Text(AppString.skip,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall),
-                                ),
+                                child: CustomTextButton(
+                                    text: AppString.skip,
+                                    onPressed: () {
+                                      controller.jumpToPage(
+                                        2,
+                                      );
+                                    }),
                               )
                             : const SizedBox(
                                 height: 47,
@@ -98,24 +97,17 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             index != 0
-                                ? TextButton(
+                                ? CustomTextButton(
+                                    text: AppString.back,
                                     onPressed: () {
                                       controller.previousPage(
                                           duration:
                                               const Duration(milliseconds: 300),
                                           curve: Curves.easeIn);
-                                    },
-                                    child: Text(
-                                      AppString.back,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                  )
+                                    })
                                 : Container(),
-                            ElevatedButton(
-                              style:
-                                  Theme.of(context).elevatedButtonTheme.style!,
+                            CustomElevatedButton(
+                              index: index,
                               onPressed: () {
                                 if (index == 2) {
                                   getIt<CachedHelper>()
@@ -123,11 +115,8 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                           key: AppString.onBoardingKey,
                                           value: true)
                                       .then((value) {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomeView()),
+                                    context.navigateTo(
+                                      const HomeView(),
                                     );
                                     print('onbordering $value');
                                   });
@@ -138,13 +127,6 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                       curve: Curves.easeIn);
                                 }
                               },
-                              child: Text(
-                                index != 2
-                                    ? AppString.next
-                                    : AppString.getstarted,
-                                style:
-                                    Theme.of(context).textTheme.displayMedium,
-                              ),
                             ),
                           ],
                         )
