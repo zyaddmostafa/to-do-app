@@ -10,4 +10,5 @@ class AppColor {
   static const yellow = Colors.grey;
   static const orange = Colors.orange;
   static const bluegrey = Colors.blueGrey;
+  static const deepgrey = Color(0xff424242);
 }

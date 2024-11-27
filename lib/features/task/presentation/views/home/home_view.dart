@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
+import 'package:to_do_app/core/widgets/custom_button.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -64,88 +65,130 @@ class HomeView extends StatelessWidget {
               },
             ),
             const SizedBox(
-              height: 11,
+              height: 24,
             ),
-            taskComponent(context),
+            const TaskComponent(),
           ],
         ),
       ),
     ));
   }
+}
 
-  Card taskComponent(BuildContext context) {
-    return Card(
-      color: AppColor.red,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Task 1',
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                        fontSize: 24,
-                      ),
+class TaskComponent extends StatelessWidget {
+  const TaskComponent({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          backgroundColor: AppColor.deepgrey,
+          context: context,
+          builder: (context) {
+            return SizedBox(
+              height: 264,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    Custombutton(
+                      text: AppString.taskcompleted,
+                      onPressed: () {},
+                    ),
+                    Custombutton(
+                      color: AppColor.red,
+                      text: AppString.deletetask,
+                      onPressed: () {},
+                    ),
+                    Custombutton(
+                      text: AppString.cancle,
+                      onPressed: () {},
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        FontAwesomeIcons.clock,
-                        color: AppColor.secondaryColor,
-                        size: 24,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        "${DateFormat.jm().format(DateTime.now())} - ${DateFormat.jm().format(DateTime.now().add(const Duration(hours: 2)))}",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(fontSize: 16),
-                      ),
-                      const VerticalDivider(
-                        color: AppColor.red,
-                        thickness: 10,
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  'Learn Flutter',
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                        fontSize: 24,
-                      ),
-                )
-              ],
-            ),
-            const SizedBox(
-              width: 95,
-            ),
-            Container(
-              height: 60,
-              width: 0.6,
-              color: AppColor.secondaryColor,
-            ),
-            RotatedBox(
-              quarterTurns: 3,
-              child: Text(
-                AppString.toda,
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium!
-                    .copyWith(fontSize: 16),
               ),
-            ),
-          ],
+            );
+          },
+        );
+      },
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 20),
+        color: AppColor.red,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Task 1',
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          fontSize: 24,
+                        ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          FontAwesomeIcons.clock,
+                          color: AppColor.secondaryColor,
+                          size: 24,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          "${DateFormat.jm().format(DateTime.now())} - ${DateFormat.jm().format(DateTime.now().add(const Duration(hours: 2)))}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(fontSize: 16),
+                        ),
+                        const VerticalDivider(
+                          color: AppColor.red,
+                          thickness: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    'Learn Flutter',
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          fontSize: 24,
+                        ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                width: 95,
+              ),
+              Container(
+                height: 60,
+                width: 0.6,
+                color: AppColor.secondaryColor,
+              ),
+              RotatedBox(
+                quarterTurns: 3,
+                child: Text(
+                  AppString.toda,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(fontSize: 16),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
