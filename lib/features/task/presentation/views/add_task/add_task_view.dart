@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/widgets/custom_button.dart';
-import 'package:to_do_app/features/task/components/date_picker_component.dart';
-import 'package:to_do_app/features/task/components/time_picker_component.dart';
+import 'package:to_do_app/features/task/presentation/components/date_picker_component.dart';
+import 'package:to_do_app/features/task/presentation/components/time_picker_component.dart';
 import 'package:to_do_app/features/task/presentation/manager/task/task_cubit.dart';
 import 'package:to_do_app/features/task/presentation/widgets/add_task_component.dart';
 

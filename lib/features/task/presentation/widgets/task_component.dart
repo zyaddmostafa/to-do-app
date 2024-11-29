@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/widgets/custom_button.dart';
+import 'package:to_do_app/features/task/data/model/task_model.dart';
 import 'package:to_do_app/features/task/presentation/widgets/task_card.dart';
 
 class TaskComponent extends StatelessWidget {
   const TaskComponent({
     super.key,
+    required this.taskModel,
   });
-
+  final TaskModel taskModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -45,7 +47,9 @@ class TaskComponent extends StatelessWidget {
           },
         );
       },
-      child: const TaskCard(),
+      child: TaskCard(
+        taskModel: taskModel,
+      ),
     );
   }
 }

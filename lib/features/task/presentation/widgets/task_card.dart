@@ -4,17 +4,19 @@ import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
+import 'package:to_do_app/features/task/data/model/task_model.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({
     super.key,
+    required this.taskModel,
   });
-
+  final TaskModel taskModel;
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 20),
-      color: AppColor.red,
+      color: AppColor.colorList[taskModel.color],
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -24,7 +26,7 @@ class TaskCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Task 1',
+                  taskModel.title,
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
                         fontSize: 24.sp,
                       ),
@@ -45,7 +47,7 @@ class TaskCard extends StatelessWidget {
                         width: 8.w,
                       ),
                       Text(
-                        "${DateFormat.jm().format(DateTime.now())} - ${DateFormat.jm().format(DateTime.now().add(const Duration(hours: 2)))}",
+                        "${taskModel.starttime} - ${taskModel.endtime}",
                         style: Theme.of(context)
                             .textTheme
                             .displayMedium!
@@ -55,7 +57,7 @@ class TaskCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Learn Flutter',
+                  taskModel.note,
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
                         fontSize: 24.sp,
                       ),
@@ -73,7 +75,9 @@ class TaskCard extends StatelessWidget {
             RotatedBox(
               quarterTurns: 3,
               child: Text(
-                AppString.toda,
+                taskModel.isCompleted
+                    ? AppString.taskcompleted
+                    : AppString.toda,
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium!

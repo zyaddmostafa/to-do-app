@@ -6,7 +6,7 @@ import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/features/task/presentation/manager/task/task_cubit.dart';
 import 'package:to_do_app/features/task/presentation/widgets/add_task_component.dart';
 
-import '../../../core/utils/app_string.dart';
+import '../../../../core/utils/app_string.dart';
 
 timePickerComponent(
     {required String startTime,

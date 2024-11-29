@@ -5,14 +5,17 @@ import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/utils/navigate_helper.dart';
+import 'package:to_do_app/features/task/data/model/task_model.dart';
 import 'package:to_do_app/features/task/presentation/views/add_task/add_task_view.dart';
-import 'package:to_do_app/features/task/presentation/widgets/task_component.dart';
+import 'package:to_do_app/features/task/presentation/widgets/no_task.dart';
+import 'package:to_do_app/features/task/presentation/widgets/task_list_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<TaskModel> tasklist = TaskModel.tasklist;
     return SafeArea(
         child: Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -70,7 +73,9 @@ class HomeView extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            const TaskComponent(),
+            tasklist.isEmpty
+                ? const NoTaskWidget()
+                : TaskListView(taskModel: tasklist),
           ],
         ),
       ),
