@@ -19,10 +19,10 @@ class TaskComponent extends StatelessWidget {
           context: context,
           builder: (context) {
             return SizedBox(
-              height: 264.h,
+              height: 240.h,
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   children: [
                     Custombutton(
