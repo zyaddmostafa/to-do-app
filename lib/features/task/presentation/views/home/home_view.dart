@@ -1,5 +1,6 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
@@ -17,7 +18,7 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
-          context.navigateTo(AddTaskView());
+          context.navigateTo(const AddTaskView());
         },
         backgroundColor: AppColor.primaryColor,
         child: const Icon(
@@ -35,23 +36,23 @@ class HomeView extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .displayLarge!
-                  .copyWith(fontSize: 24),
+                  .copyWith(fontSize: 24.sp),
             ),
-            const SizedBox(
-              height: 12,
+            SizedBox(
+              height: 12.h,
             ),
             Text(
               AppString.today,
               style: Theme.of(context)
                   .textTheme
                   .displayLarge!
-                  .copyWith(fontSize: 24),
+                  .copyWith(fontSize: 24.sp),
             ),
-            const SizedBox(
-              height: 14,
+            SizedBox(
+              height: 14.h,
             ),
             DatePicker(
-              height: 94,
+              height: 94.h,
               DateTime.now(),
               initialSelectedDate: DateTime.now(),
               selectionColor: AppColor.primaryColor.withOpacity(0.7),
@@ -66,8 +67,8 @@ class HomeView extends StatelessWidget {
                 // });
               },
             ),
-            const SizedBox(
-              height: 24,
+            SizedBox(
+              height: 24.h,
             ),
             const TaskComponent(),
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/core/database/cached_helper.dart';
 import 'package:to_do_app/core/services/service_locator.dart';
@@ -45,12 +46,14 @@ class _SplashViewState extends State<SplashView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(AppAssets.logo),
-            const SizedBox(height: 10),
+            SizedBox(
+              height: 10.h,
+            ),
             Text(
               AppString.appname,
               style: TextStyle(
                 fontFamily: GoogleFonts.lato().fontFamily,
-                fontSize: 40,
+                fontSize: 40.sp,
                 fontWeight: FontWeight.bold,
                 color: AppColor.secondaryColor,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:to_do_app/core/database/cached_helper.dart';
@@ -47,18 +48,18 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                                       );
                                     }),
                               )
-                            : const SizedBox(
-                                height: 47,
+                            : SizedBox(
+                                height: 47.h,
                               ),
-                        const SizedBox(
-                          height: 16,
+                        SizedBox(
+                          height: 16.h,
                         ),
                         //image
                         Image.asset(
                           OnborderModel.onborderList[index].image,
                         ),
-                        const SizedBox(
-                          height: 16,
+                        SizedBox(
+                          height: 16.h,
                         ),
 
                         //donts
@@ -69,28 +70,28 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
                               dotColor:
                                   AppColor.secondaryColor.withOpacity(0.44),
                               activeDotColor: AppColor.primaryColor,
-                              dotHeight: 8,
-                              dotWidth: 20,
+                              dotHeight: 8.h,
+                              dotWidth: 20.w,
                               spacing: 4,
                             )),
-                        const SizedBox(
-                          height: 50,
+                        SizedBox(
+                          height: 50.h,
                         ),
                         //title
                         Text(
                           OnborderModel.onborderList[index].title,
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
-                        const SizedBox(
-                          height: 40,
+                        SizedBox(
+                          height: 40.h,
                         ),
                         //description
                         Text(
                           OnborderModel.onborderList[index].subtitle,
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
-                        const SizedBox(
-                          height: 90,
+                        SizedBox(
+                          height: 90.h,
                         ),
                         // buttons
                         Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/features/task/presentation/widgets/add_task_component.dart';
@@ -32,8 +33,8 @@ StatefulBuilder timePickerComponent(
               ),
             ),
           ),
-          const SizedBox(
-            width: 24,
+          SizedBox(
+            width: 24.w,
           ),
           Expanded(
             child: AddTaskComponent(

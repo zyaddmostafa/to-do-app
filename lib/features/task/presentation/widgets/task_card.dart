@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
@@ -25,11 +26,11 @@ class TaskCard extends StatelessWidget {
                 Text(
                   'Task 1',
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                        fontSize: 24,
+                        fontSize: 24.sp,
                       ),
                 ),
-                const SizedBox(
-                  height: 8,
+                SizedBox(
+                  height: 8.h,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -40,15 +41,15 @@ class TaskCard extends StatelessWidget {
                         color: AppColor.secondaryColor,
                         size: 24,
                       ),
-                      const SizedBox(
-                        width: 8,
+                      SizedBox(
+                        width: 8.w,
                       ),
                       Text(
                         "${DateFormat.jm().format(DateTime.now())} - ${DateFormat.jm().format(DateTime.now().add(const Duration(hours: 2)))}",
                         style: Theme.of(context)
                             .textTheme
                             .displayMedium!
-                            .copyWith(fontSize: 16),
+                            .copyWith(fontSize: 16.sp),
                       ),
                     ],
                   ),
@@ -56,17 +57,17 @@ class TaskCard extends StatelessWidget {
                 Text(
                   'Learn Flutter',
                   style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                        fontSize: 24,
+                        fontSize: 24.sp,
                       ),
                 )
               ],
             ),
-            const SizedBox(
-              width: 100,
+            SizedBox(
+              width: 100.w,
             ),
             Container(
-              height: 60,
-              width: 0.6,
+              height: 60.h,
+              width: 0.6.w,
               color: AppColor.secondaryColor,
             ),
             RotatedBox(
@@ -76,7 +77,7 @@ class TaskCard extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium!
-                    .copyWith(fontSize: 16),
+                    .copyWith(fontSize: 16.sp),
               ),
             ),
           ],

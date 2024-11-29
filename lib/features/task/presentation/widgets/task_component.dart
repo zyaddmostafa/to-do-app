@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/widgets/custom_button.dart';
@@ -18,7 +19,7 @@ class TaskComponent extends StatelessWidget {
           context: context,
           builder: (context) {
             return SizedBox(
-              height: 264,
+              height: 264.h,
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(24),

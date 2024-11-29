@@ -12,4 +12,15 @@ class AppColor {
   static const bluegrey = Colors.blueGrey;
   static const deepgrey = Color(0xff424242);
   static const semiblack = Color(0xff1D1D1D);
+
+  static const List<Color> colorList = [
+    primaryColor,
+    red,
+    green,
+    blue,
+    deepgrey,
+    orange,
+
+    // deep grey
+  ];
 }
