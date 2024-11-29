@@ -1,11 +1,11 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:intl/intl.dart';
-import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
-import 'package:to_do_app/core/widgets/custom_button.dart';
+import 'package:to_do_app/core/utils/navigate_helper.dart';
+import 'package:to_do_app/features/task/presentation/views/add_task/add_task_view.dart';
+import 'package:to_do_app/features/task/presentation/widgets/task_component.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -16,7 +16,9 @@ class HomeView extends StatelessWidget {
         child: Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        onPressed: () {},
+        onPressed: () {
+          context.navigateTo(AddTaskView());
+        },
         backgroundColor: AppColor.primaryColor,
         child: const Icon(
           Icons.add,
@@ -72,158 +74,5 @@ class HomeView extends StatelessWidget {
         ),
       ),
     ));
-  }
-}
-
-class TaskComponent extends StatelessWidget {
-  const TaskComponent({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          backgroundColor: AppColor.deepgrey,
-          context: context,
-          builder: (context) {
-            return SizedBox(
-              height: 264,
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    Custombutton(
-                      text: AppString.taskcompleted,
-                      onPressed: () {},
-                    ),
-                    Custombutton(
-                      color: AppColor.red,
-                      text: AppString.deletetask,
-                      onPressed: () {},
-                    ),
-                    Custombutton(
-                      text: AppString.cancle,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-      child: Card(
-        margin: const EdgeInsets.only(bottom: 20),
-        color: AppColor.red,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Task 1',
-                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                          fontSize: 24,
-                        ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          FontAwesomeIcons.clock,
-                          color: AppColor.secondaryColor,
-                          size: 24,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          "${DateFormat.jm().format(DateTime.now())} - ${DateFormat.jm().format(DateTime.now().add(const Duration(hours: 2)))}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayMedium!
-                              .copyWith(fontSize: 16),
-                        ),
-                        const VerticalDivider(
-                          color: AppColor.red,
-                          thickness: 10,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    'Learn Flutter',
-                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                          fontSize: 24,
-                        ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                width: 95,
-              ),
-              Container(
-                height: 60,
-                width: 0.6,
-                color: AppColor.secondaryColor,
-              ),
-              RotatedBox(
-                quarterTurns: 3,
-                child: Text(
-                  AppString.toda,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(fontSize: 16),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class NoTaskWidget extends StatelessWidget {
-  const NoTaskWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        children: [
-          Image.asset(AppAssets.notask),
-          Text(
-            AppString.notask,
-            style: Theme.of(context)
-                .textTheme
-                .displayMedium!
-                .copyWith(fontSize: 20),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(AppString.notasksub,
-              style: Theme.of(context)
-                  .textTheme
-                  .displayMedium!
-                  .copyWith(fontSize: 16)),
-        ],
-      ),
-    );
   }
 }

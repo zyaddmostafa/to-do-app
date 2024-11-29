@@ -4,36 +4,51 @@ import 'package:to_do_app/core/utils/app_color.dart';
 
 ThemeData getThemeData() {
   return ThemeData(
-    scaffoldBackgroundColor: AppColor.backgroundColor,
-    primaryColor: AppColor.primaryColor,
-    textTheme: TextTheme(
-      displayLarge: TextStyle(
-        fontFamily: GoogleFonts.lato().fontFamily,
-        fontSize: 32,
-        fontWeight: FontWeight.w700,
-        color: AppColor.secondaryColor,
-      ),
-      displayMedium: TextStyle(
-        fontFamily: GoogleFonts.lato().fontFamily,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: AppColor.secondaryColor,
-      ),
-      displaySmall: TextStyle(
-        fontFamily: GoogleFonts.lato().fontFamily,
-        fontSize: 16,
-        color: AppColor.secondaryColor.withOpacity(0.44),
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColor.primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
+      scaffoldBackgroundColor: AppColor.backgroundColor,
+      primaryColor: AppColor.primaryColor,
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          fontSize: 32,
+          fontWeight: FontWeight.w700,
+          color: AppColor.secondaryColor,
+        ),
+        displayMedium: TextStyle(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: AppColor.secondaryColor,
+        ),
+        displaySmall: TextStyle(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          fontSize: 16,
+          color: AppColor.secondaryColor.withOpacity(0.44),
         ),
       ),
-    ),
-  );
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColor.primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColor.semiblack,
+        hintStyle: TextStyle(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: AppColor.secondaryColor,
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+      ));
 }
 
 ThemeData getThemeDarkData() {
