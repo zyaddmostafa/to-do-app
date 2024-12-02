@@ -35,4 +35,5 @@ class AppString {
   static String deletetask = 'Delete Task';
   static String titleerror = 'Title is required';
   static String noteerror = 'Note is required';
+  static String taskadded = 'Task added successfully';
 }

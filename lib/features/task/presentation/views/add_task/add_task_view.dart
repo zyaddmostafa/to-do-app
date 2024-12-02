@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:to_do_app/core/component/componnet.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/widgets/custom_button.dart';
@@ -30,6 +32,9 @@ class AddTaskView extends StatelessWidget {
           return BlocConsumer<TaskCubit, TaskState>(
             listener: (context, state) {
               if (state is TaskInsertSuccess) {
+                showtoast(
+                    message: AppString.taskadded, state: ToastState.success);
+
                 Navigator.pop(context);
               }
             },

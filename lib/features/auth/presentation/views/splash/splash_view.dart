@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do_app/core/database/cached_helper.dart';
+import 'package:to_do_app/core/database/cache/cached_helper.dart';
 import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
