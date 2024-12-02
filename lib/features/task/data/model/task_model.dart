@@ -6,6 +6,7 @@ class TaskModel {
   final String endtime;
   final bool isCompleted;
   final int color;
+  final String date;
 
   TaskModel(
       {required this.id,
@@ -14,24 +15,6 @@ class TaskModel {
       required this.starttime,
       required this.endtime,
       required this.isCompleted,
-      required this.color});
-
-  static List<TaskModel> tasklist = [
-    TaskModel(
-        id: '1',
-        title: 'zyad',
-        note: 'learn flutter',
-        starttime: '9:33',
-        endtime: '10:33',
-        isCompleted: false,
-        color: 2),
-    TaskModel(
-        id: '2',
-        title: 'task',
-        note: 'learn ML',
-        starttime: '9:33',
-        endtime: '10:33',
-        isCompleted: true,
-        color: 3)
-  ];
+      required this.color,
+      required this.date});
 }

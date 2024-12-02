@@ -75,9 +75,7 @@ class TaskCard extends StatelessWidget {
             RotatedBox(
               quarterTurns: 3,
               child: Text(
-                taskModel.isCompleted
-                    ? AppString.taskcompleted
-                    : AppString.toda,
+                taskModel.isCompleted ? AppString.completed : AppString.toda,
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium!

@@ -44,3 +44,13 @@ final class TaskSelectedColorFaliur extends TaskState {
 
   TaskSelectedColorFaliur(this.errormeasage);
 }
+
+final class TaskInsertLoading extends TaskState {}
+
+final class TaskInsertSuccess extends TaskState {}
+
+final class TaskInsertFaliur extends TaskState {
+  final String errormeasage;
+
+  TaskInsertFaliur(this.errormeasage);
+}

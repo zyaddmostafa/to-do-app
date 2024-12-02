@@ -28,15 +28,18 @@ class TaskComponent extends StatelessWidget {
                 child: Column(
                   children: [
                     Custombutton(
+                      isloading: false,
                       text: AppString.taskcompleted,
                       onPressed: () {},
                     ),
                     Custombutton(
+                      isloading: false,
                       color: AppColor.red,
                       text: AppString.deletetask,
                       onPressed: () {},
                     ),
                     Custombutton(
+                      isloading: false,
                       text: AppString.cancle,
                       onPressed: () {},
                     ),

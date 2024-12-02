@@ -1,11 +1,12 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/utils/navigate_helper.dart';
-import 'package:to_do_app/features/task/data/model/task_model.dart';
+import 'package:to_do_app/features/task/presentation/manager/task/task_cubit.dart';
 import 'package:to_do_app/features/task/presentation/views/add_task/add_task_view.dart';
 import 'package:to_do_app/features/task/presentation/widgets/no_task.dart';
 import 'package:to_do_app/features/task/presentation/widgets/task_list_view.dart';
@@ -15,7 +16,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<TaskModel> tasklist = TaskModel.tasklist;
     return SafeArea(
         child: Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -73,9 +73,10 @@ class HomeView extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            tasklist.isEmpty
+            BlocProvider.of<TaskCubit>(context).tasklist.isEmpty
                 ? const NoTaskWidget()
-                : TaskListView(taskModel: tasklist),
+                : TaskListView(
+                    taskModel: BlocProvider.of<TaskCubit>(context).tasklist),
           ],
         ),
       ),

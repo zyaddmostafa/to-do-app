@@ -7,13 +7,14 @@ class AddTaskComponent extends StatelessWidget {
   final String titlehint;
   final IconButton? suffixIcon;
   final TextEditingController? controller;
-
+  final String? Function(String?)? validator;
   const AddTaskComponent({
     super.key,
     required this.title,
     required this.titlehint,
     this.suffixIcon,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -30,6 +31,7 @@ class AddTaskComponent extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         TextFormField(
+          validator: validator,
           controller: controller,
           readOnly: suffixIcon != null ? true : false,
           decoration: InputDecoration(

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
+import 'package:to_do_app/features/task/data/model/task_model.dart';
 
 part 'task_state.dart';
 
@@ -10,6 +11,7 @@ class TaskCubit extends Cubit<TaskState> {
   TextEditingController titleController = TextEditingController();
 
   TextEditingController noteController = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey();
 
   DateTime curentDate = DateTime.now();
 
@@ -73,6 +75,29 @@ class TaskCubit extends Cubit<TaskState> {
       emit(TaskSelectedColorSuccess());
     } on Exception catch (e) {
       emit(TaskSelectedColorFaliur(e.toString()));
+    }
+  }
+
+  List<TaskModel> tasklist = [];
+
+  void insertTask() {
+    emit(TaskInsertLoading());
+    try {
+      tasklist.add(TaskModel(
+          id: '1',
+          title: titleController.text,
+          note: noteController.text,
+          starttime: startTime,
+          endtime: endTime,
+          isCompleted: false,
+          color: selectedColor,
+          date: DateFormat('yyyy-MM-dd').format(curentDate)));
+      titleController.clear();
+      noteController.clear();
+      emit(TaskInsertSuccess());
+      print(tasklist.length);
+    } on Exception catch (e) {
+      emit(TaskInsertFaliur(e.toString()));
     }
   }
 }

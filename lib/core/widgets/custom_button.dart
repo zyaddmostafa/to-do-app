@@ -8,7 +8,9 @@ class Custombutton extends StatelessWidget {
     required this.onPressed,
     required this.text,
     this.color = AppColor.primaryColor,
+    required this.isloading,
   });
+  final bool isloading;
   final void Function() onPressed;
   final String text;
   final Color color;
@@ -27,10 +29,15 @@ class Custombutton extends StatelessWidget {
             ),
           ),
           onPressed: onPressed,
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.displayMedium,
-          ),
+          child: isloading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: AppColor.secondaryColor,
+                ))
+              : Text(
+                  text,
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
         ),
       ),
     );
