@@ -3,6 +3,10 @@ import 'package:to_do_app/features/task/data/model/task_model.dart';
 
 class SqfliteHelper {
   late Database database;
+
+  Future<void> initializeDatabase() async {
+    database = await initDb();
+  }
   //create db
   //create table
   //insert to db create
@@ -54,13 +58,13 @@ class SqfliteHelper {
     color,
     iscompleted
     ) VALUES(
-    ${taskmodel.title},
-    ${taskmodel.note},
-    ${taskmodel.date},
-    ${taskmodel.starttime},
-    ${taskmodel.endtime},
-    ${taskmodel.color},
-    ${taskmodel.isCompleted}
+    '${taskmodel.title}',
+    '${taskmodel.note}',
+   ' ${taskmodel.date}',
+   ' ${taskmodel.starttime}',
+    '${taskmodel.endtime}',
+   ' ${taskmodel.color}',
+   ' ${taskmodel.isCompleted}'
     )
 ''');
   }

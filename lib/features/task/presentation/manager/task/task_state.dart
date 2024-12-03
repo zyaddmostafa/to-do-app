@@ -54,3 +54,33 @@ final class TaskInsertFaliur extends TaskState {
 
   TaskInsertFaliur(this.errormeasage);
 }
+
+final class TaskGetLoading extends TaskState {}
+
+final class TaskGetSuccess extends TaskState {}
+
+final class TaskGetFaliur extends TaskState {
+  final String errormeasage;
+
+  TaskGetFaliur(this.errormeasage);
+}
+
+final class TaskDeleteLoading extends TaskState {}
+
+final class TaskDeleteSuccess extends TaskState {}
+
+final class TaskDeleteFaliur extends TaskState {
+  final String errormeasage;
+
+  TaskDeleteFaliur(this.errormeasage);
+}
+
+final class TaskUpdateLoading extends TaskState {}
+
+final class TaskUpdateSuccess extends TaskState {}
+
+final class TaskUpdateFaliur extends TaskState {
+  final String errormeasage;
+
+  TaskUpdateFaliur(this.errormeasage);
+}

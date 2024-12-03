@@ -12,6 +12,7 @@ class TaskListView extends StatelessWidget {
           itemCount: taskModel.length,
           itemBuilder: (context, index) {
             return TaskComponent(
+              index: index,
               taskModel: taskModel[index],
             );
           }),

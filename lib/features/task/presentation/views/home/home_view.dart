@@ -73,10 +73,15 @@ class HomeView extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            BlocProvider.of<TaskCubit>(context).tasklist.isEmpty
-                ? const NoTaskWidget()
-                : TaskListView(
-                    taskModel: BlocProvider.of<TaskCubit>(context).tasklist),
+            BlocBuilder<TaskCubit, TaskState>(
+              builder: (context, state) {
+                return BlocProvider.of<TaskCubit>(context).tasklist.isEmpty
+                    ? const NoTaskWidget()
+                    : TaskListView(
+                        taskModel:
+                            BlocProvider.of<TaskCubit>(context).tasklist);
+              },
+            ),
           ],
         ),
       ),

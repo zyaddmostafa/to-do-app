@@ -9,12 +9,14 @@ import 'package:to_do_app/features/task/presentation/manager/task/task_cubit.dar
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = AppBlocObserver();
   setup();
   await getIt<CachedHelper>().init();
   await getIt<SqfliteHelper>().initDb();
-  Bloc.observer = AppBlocObserver();
+  await getIt<SqfliteHelper>().initializeDatabase();
+
   runApp(BlocProvider(
-    create: (context) => TaskCubit(),
+    create: (context) => TaskCubit()..getTasks(),
     child: const App(),
   ));
 }

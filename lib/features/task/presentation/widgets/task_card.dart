@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
-import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/features/task/data/model/task_model.dart';
@@ -75,7 +74,9 @@ class TaskCard extends StatelessWidget {
             RotatedBox(
               quarterTurns: 3,
               child: Text(
-                taskModel.isCompleted ? AppString.completed : AppString.toda,
+                taskModel.isCompleted == 1
+                    ? AppString.completed
+                    : AppString.toda,
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium!

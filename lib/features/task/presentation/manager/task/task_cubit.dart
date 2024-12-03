@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
+import 'package:to_do_app/core/database/sqflite_helper/sqflite_helper.dart';
+import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/features/task/data/model/task_model.dart';
 
 part 'task_state.dart';
@@ -80,24 +82,67 @@ class TaskCubit extends Cubit<TaskState> {
 
   List<TaskModel> tasklist = [];
 
-  void insertTask() {
+  void insertTask() async {
     emit(TaskInsertLoading());
     try {
-      tasklist.add(TaskModel(
-          id: '1',
+      await getIt<SqfliteHelper>().insertTask(TaskModel(
           title: titleController.text,
           note: noteController.text,
           starttime: startTime,
           endtime: endTime,
-          isCompleted: false,
+          isCompleted: 0,
           color: selectedColor,
           date: DateFormat('yyyy-MM-dd').format(curentDate)));
+      getTasks();
+      // tasklist.add(TaskModel(
+      //     id: '1',
+      //     title: titleController.text,
+      //     note: noteController.text,
+      //     starttime: startTime,
+      //     endtime: endTime,
+      //     isCompleted: false,
+      //     color: selectedColor,
+      //     date: DateFormat('yyyy-MM-dd').format(curentDate)));
       titleController.clear();
       noteController.clear();
       emit(TaskInsertSuccess());
       print(tasklist.length);
     } on Exception catch (e) {
       emit(TaskInsertFaliur(e.toString()));
+    }
+  }
+
+  Future getTasks() async {
+    emit(TaskGetLoading());
+    try {
+      await getIt<SqfliteHelper>().getTasks().then((value) {
+        tasklist = value.map((e) => TaskModel.fromjson(e)).toList();
+      });
+      emit(TaskGetSuccess());
+    } on Exception catch (e) {
+      emit(TaskGetFaliur(e.toString()));
+    }
+  }
+
+  void updateTask({required int id}) async {
+    emit(TaskUpdateLoading());
+    try {
+      await getIt<SqfliteHelper>().updateTask(id);
+      getTasks();
+      emit(TaskUpdateSuccess());
+    } on Exception catch (e) {
+      emit(TaskUpdateFaliur(e.toString()));
+    }
+  }
+
+  void deleteTask({required int id}) async {
+    emit(TaskDeleteLoading());
+    try {
+      await getIt<SqfliteHelper>().deleteTask(id);
+      getTasks();
+      emit(TaskDeleteSuccess());
+    } on Exception catch (e) {
+      emit(TaskDeleteFaliur(e.toString()));
     }
   }
 }

@@ -6,5 +6,8 @@ final getIt = GetIt.instance;
 
 void setup() {
   getIt.registerLazySingleton<CachedHelper>(() => CachedHelper());
-  getIt.registerLazySingleton<SqfliteHelper>(() => SqfliteHelper());
+
+  getIt.registerSingleton<SqfliteHelper>(
+    SqfliteHelper(),
+  );
 }
