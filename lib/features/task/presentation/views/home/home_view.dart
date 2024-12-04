@@ -17,74 +17,88 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        onPressed: () {
-          context.navigateTo(const AddTaskView());
-        },
-        backgroundColor: AppColor.primaryColor,
-        child: const Icon(
-          Icons.add,
-          color: AppColor.secondaryColor,
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          onPressed: () {
+            context.navigateTo(const AddTaskView());
+          },
+          backgroundColor: AppColor.primaryColor,
+          child: const Icon(
+            Icons.add,
+            color: AppColor.secondaryColor,
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: BlocBuilder<TaskCubit, TaskState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        DateFormat.yMMMMd().format(DateTime.now()),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(fontSize: 24.sp),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            BlocProvider.of<TaskCubit>(context).changeTheme();
+                          },
+                          icon: Icon(
+                            Icons.mode_night_rounded,
+                            color: BlocProvider.of<TaskCubit>(context).isDark
+                                ? AppColor.secondaryColor
+                                : AppColor.backgroundColor,
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppString.today,
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge!
+                        .copyWith(fontSize: 24.sp),
+                  ),
+                  SizedBox(
+                    height: 14.h,
+                  ),
+                  DatePicker(
+                    height: 94.h,
+                    DateTime.now(),
+                    initialSelectedDate: DateTime.now(),
+                    selectionColor: AppColor.primaryColor.withOpacity(0.7),
+                    selectedTextColor: Colors.white,
+                    dateTextStyle: Theme.of(context).textTheme.displaySmall!,
+                    dayTextStyle: Theme.of(context).textTheme.displaySmall!,
+                    monthTextStyle: Theme.of(context).textTheme.displaySmall!,
+                    onDateChange: (date) {
+                      BlocProvider.of<TaskCubit>(context).getSelectedDate(date);
+                    },
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  BlocProvider.of<TaskCubit>(context).tasklist.isEmpty
+                      ? const NoTaskWidget()
+                      : TaskListView(
+                          taskModel:
+                              BlocProvider.of<TaskCubit>(context).tasklist)
+                ],
+              );
+            },
+          ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              DateFormat.yMMMMd().format(DateTime.now()),
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge!
-                  .copyWith(fontSize: 24.sp),
-            ),
-            SizedBox(
-              height: 12.h,
-            ),
-            Text(
-              AppString.today,
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge!
-                  .copyWith(fontSize: 24.sp),
-            ),
-            SizedBox(
-              height: 14.h,
-            ),
-            DatePicker(
-              height: 94.h,
-              DateTime.now(),
-              initialSelectedDate: DateTime.now(),
-              selectionColor: AppColor.primaryColor.withOpacity(0.7),
-              selectedTextColor: Colors.white,
-              dateTextStyle: Theme.of(context).textTheme.displaySmall!,
-              dayTextStyle: Theme.of(context).textTheme.displaySmall!,
-              monthTextStyle: Theme.of(context).textTheme.displaySmall!,
-              onDateChange: (date) {
-                // New date selected
-                // setState(() {
-                //   _selectedValue = date;
-                // });
-              },
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            BlocBuilder<TaskCubit, TaskState>(
-              builder: (context, state) {
-                return BlocProvider.of<TaskCubit>(context).tasklist.isEmpty
-                    ? const NoTaskWidget()
-                    : TaskListView(
-                        taskModel:
-                            BlocProvider.of<TaskCubit>(context).tasklist);
-              },
-            ),
-          ],
-        ),
-      ),
-    ));
+    );
   }
 }

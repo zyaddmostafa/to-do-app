@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_app/core/component/componnet.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
@@ -20,7 +19,7 @@ class AddTaskView extends StatelessWidget {
       appBar: AppBar(
         iconTheme: Theme.of(context)
             .iconTheme
-            .copyWith(color: AppColor.secondaryColor),
+            .copyWith(color: Theme.of(context).textTheme.displayLarge?.color),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
           AppString.addtask,
@@ -95,7 +94,10 @@ class AddTaskView extends StatelessWidget {
                                     .bodyLarge
                                     ?.copyWith(
                                       fontSize: 16.sp,
-                                      color: AppColor.secondaryColor,
+                                      color: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .hintStyle
+                                          ?.color,
                                     ),
                               ),
                               SizedBox(

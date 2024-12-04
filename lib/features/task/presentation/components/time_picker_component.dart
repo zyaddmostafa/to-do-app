@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
-import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/features/task/presentation/manager/task/task_cubit.dart';
 import 'package:to_do_app/features/task/presentation/widgets/add_task_component.dart';
 
@@ -22,9 +21,9 @@ timePickerComponent(
             onPressed: () async {
               BlocProvider.of<TaskCubit>(context).getStartTime(context);
             },
-            icon: const Icon(
+            icon: Icon(
               FontAwesomeIcons.clock,
-              color: AppColor.secondaryColor,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
         ),
@@ -40,9 +39,9 @@ timePickerComponent(
             onPressed: () {
               BlocProvider.of<TaskCubit>(context).getEndTime(context);
             },
-            icon: const Icon(
+            icon: Icon(
               FontAwesomeIcons.clock,
-              color: AppColor.secondaryColor,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
         ),

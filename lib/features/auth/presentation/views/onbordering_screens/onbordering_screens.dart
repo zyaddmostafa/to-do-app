@@ -26,7 +26,7 @@ class _OnborderingScreensState extends State<OnborderingScreens> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(

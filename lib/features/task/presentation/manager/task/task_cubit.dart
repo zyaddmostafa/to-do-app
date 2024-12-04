@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
+import 'package:to_do_app/core/database/cache/cached_helper.dart';
 import 'package:to_do_app/core/database/sqflite_helper/sqflite_helper.dart';
 import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/features/task/data/model/task_model.dart';
@@ -16,6 +16,7 @@ class TaskCubit extends Cubit<TaskState> {
   GlobalKey<FormState> formkey = GlobalKey();
 
   DateTime curentDate = DateTime.now();
+  DateTime selectedDate = DateTime.now();
 
   String startTime = DateFormat.jm().format(DateTime.now());
 
@@ -92,21 +93,13 @@ class TaskCubit extends Cubit<TaskState> {
           endtime: endTime,
           isCompleted: 0,
           color: selectedColor,
-          date: DateFormat('yyyy-MM-dd').format(curentDate)));
-      getTasks();
-      // tasklist.add(TaskModel(
-      //     id: '1',
-      //     title: titleController.text,
-      //     note: noteController.text,
-      //     starttime: startTime,
-      //     endtime: endTime,
-      //     isCompleted: false,
-      //     color: selectedColor,
-      //     date: DateFormat('yyyy-MM-dd').format(curentDate)));
+          date: DateFormat.yMd().format(curentDate)));
+
       titleController.clear();
       noteController.clear();
       emit(TaskInsertSuccess());
-      print(tasklist.length);
+
+      await getTasks();
     } on Exception catch (e) {
       emit(TaskInsertFaliur(e.toString()));
     }
@@ -115,9 +108,17 @@ class TaskCubit extends Cubit<TaskState> {
   Future getTasks() async {
     emit(TaskGetLoading());
     try {
-      await getIt<SqfliteHelper>().getTasks().then((value) {
-        tasklist = value.map((e) => TaskModel.fromjson(e)).toList();
-      });
+      await getIt<SqfliteHelper>().getTasks().then(
+        (value) {
+          tasklist = value
+              .map((e) => TaskModel.fromjson(e))
+              .toList()
+              .where((element) =>
+                  element.date == DateFormat.yMd().format(selectedDate))
+              .toList();
+        },
+      );
+
       emit(TaskGetSuccess());
     } on Exception catch (e) {
       emit(TaskGetFaliur(e.toString()));
@@ -128,7 +129,7 @@ class TaskCubit extends Cubit<TaskState> {
     emit(TaskUpdateLoading());
     try {
       await getIt<SqfliteHelper>().updateTask(id);
-      getTasks();
+      await getTasks();
       emit(TaskUpdateSuccess());
     } on Exception catch (e) {
       emit(TaskUpdateFaliur(e.toString()));
@@ -139,10 +140,31 @@ class TaskCubit extends Cubit<TaskState> {
     emit(TaskDeleteLoading());
     try {
       await getIt<SqfliteHelper>().deleteTask(id);
-      getTasks();
+      await getTasks();
       emit(TaskDeleteSuccess());
     } on Exception catch (e) {
       emit(TaskDeleteFaliur(e.toString()));
     }
+  }
+
+  void getSelectedDate(date) async {
+    emit(TaskSelectedDateLoading());
+    selectedDate = date;
+
+    emit(TaskSelectedDateSuccess());
+    await getTasks();
+  }
+
+  bool isDark = false;
+  void changeTheme() async {
+    isDark = !isDark;
+    await getIt<CachedHelper>().savedata(key: 'theme', value: isDark);
+
+    emit(TaskThemeChange());
+  }
+
+  void getTheme() async {
+    isDark = await getIt<CachedHelper>().getdata(key: 'theme') ?? false;
+    emit(TaskThemeChange());
   }
 }

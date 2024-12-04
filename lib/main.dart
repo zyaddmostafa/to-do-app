@@ -16,7 +16,9 @@ void main() async {
   await getIt<SqfliteHelper>().initializeDatabase();
 
   runApp(BlocProvider(
-    create: (context) => TaskCubit()..getTasks(),
+    create: (context) => TaskCubit()
+      ..getTheme()
+      ..getTasks(),
     child: const App(),
   ));
 }

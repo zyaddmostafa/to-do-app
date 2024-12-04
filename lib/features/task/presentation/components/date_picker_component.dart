@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/features/task/presentation/manager/task/task_cubit.dart';
 import 'package:to_do_app/features/task/presentation/widgets/add_task_component.dart';
@@ -15,9 +14,9 @@ datePickerComponent(
       onPressed: () async {
         BlocProvider.of<TaskCubit>(context).getDate(context);
       },
-      icon: const Icon(
+      icon: Icon(
         Icons.calendar_today,
-        color: AppColor.secondaryColor,
+        color: Theme.of(context).iconTheme.color,
       ),
     ),
   );

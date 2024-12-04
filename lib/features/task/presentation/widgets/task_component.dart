@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:to_do_app/core/component/componnet.dart';
 import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/core/widgets/custom_button.dart';
@@ -41,6 +40,10 @@ class TaskComponent extends StatelessWidget {
                               BlocProvider.of<TaskCubit>(context).updateTask(
                                 id: taskModel.id!,
                               );
+                              showtoast(
+                                  message:
+                                      'task that title  "${taskModel.title}" is completed',
+                                  state: ToastState.success);
 
                               Navigator.pop(context);
                             },
@@ -54,6 +57,10 @@ class TaskComponent extends StatelessWidget {
                         BlocProvider.of<TaskCubit>(context).deleteTask(
                           id: taskModel.id!,
                         );
+                        showtoast(
+                            message:
+                                'task that title " ${taskModel.title}" is deleted',
+                            state: ToastState.error);
                         Navigator.pop(context);
                       },
                     ),

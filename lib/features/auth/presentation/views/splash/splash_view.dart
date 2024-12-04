@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/core/database/cache/cached_helper.dart';
 import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
-import 'package:to_do_app/core/utils/app_color.dart';
 import 'package:to_do_app/core/utils/app_string.dart';
 import 'package:to_do_app/features/auth/presentation/views/onbordering_screens/onbordering_screens.dart';
 import 'package:to_do_app/features/task/presentation/views/home/home_view.dart';
@@ -40,7 +39,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.backgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +54,7 @@ class _SplashViewState extends State<SplashView> {
                 fontFamily: GoogleFonts.lato().fontFamily,
                 fontSize: 40.sp,
                 fontWeight: FontWeight.bold,
-                color: AppColor.secondaryColor,
+                color: Theme.of(context).textTheme.bodyMedium?.color,
               ),
             ),
           ],

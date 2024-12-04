@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:to_do_app/core/utils/app_color.dart';
 
 class AddTaskComponent extends StatelessWidget {
   final String title;
@@ -26,7 +25,7 @@ class AddTaskComponent extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontSize: 16.sp,
-                color: AppColor.secondaryColor,
+                color: Theme.of(context).inputDecorationTheme.hintStyle?.color,
               ),
         ),
         SizedBox(height: 8.h),
@@ -37,10 +36,11 @@ class AddTaskComponent extends StatelessWidget {
           decoration: InputDecoration(
             hintText: titlehint,
             hintStyle: TextStyle(
-              color: Colors.grey,
+              color: Theme.of(context).iconTheme.color,
               fontSize: 16.sp,
             ),
             suffixIcon: suffixIcon,
+            suffixIconColor: Theme.of(context).iconTheme.color,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),

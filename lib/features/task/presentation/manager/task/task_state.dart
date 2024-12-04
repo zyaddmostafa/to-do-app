@@ -84,3 +84,11 @@ final class TaskUpdateFaliur extends TaskState {
 
   TaskUpdateFaliur(this.errormeasage);
 }
+
+final class TaskSelectedDateSuccess extends TaskState {}
+
+final class TaskSelectedDateLoading extends TaskState {}
+
+final class TaskThemeChange extends TaskState {}
+
+final class TaskThemeGet extends TaskState {}
