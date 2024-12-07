@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:to_do_app/features/task/data/model/task_model.dart';
 
@@ -31,12 +33,13 @@ class SqfliteHelper {
             color INTEGER,
             iscompleted INTEGER
           )
-''').then((value) => print('Db table is created'));
+''').then((value) => log('Db table is created'));
       },
-      onOpen: (db) => print('Db is opened'),
+      onOpen: (db) => log('Db is opened'),
     ).catchError(
       (error) {
         print('Error when open db $error');
+        return 'Error when open db $error';
       },
     );
   }

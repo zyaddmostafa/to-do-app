@@ -13,10 +13,9 @@ class TaskComponent extends StatelessWidget {
   const TaskComponent({
     super.key,
     required this.taskModel,
-    required this.index,
   });
   final TaskModel taskModel;
-  final int index;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

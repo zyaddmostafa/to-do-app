@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/database/cache/cached_helper.dart';
 import 'package:to_do_app/core/database/sqflite_helper/sqflite_helper.dart';
+
+import 'package:to_do_app/core/services/local_notification_service.dart';
 import 'package:to_do_app/core/services/service_locator.dart';
 import 'package:to_do_app/features/task/data/model/task_model.dart';
 
@@ -42,6 +46,8 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
+  late TimeOfDay scheduledNotificationTime =
+      TimeOfDay(hour: curentDate.hour, minute: curentDate.minute);
   void getStartTime(context) async {
     emit(TaskStartTimeLoading());
     try {
@@ -51,6 +57,7 @@ class TaskCubit extends Cubit<TaskState> {
       );
 
       startTime = startTimePicked?.format(context) ?? startTime;
+      scheduledNotificationTime = startTimePicked ?? scheduledNotificationTime;
       emit(TaskStartTimeSuccess());
     } on Exception catch (e) {
       emit(TaskStartTimeFaliur(e.toString()));
@@ -86,50 +93,61 @@ class TaskCubit extends Cubit<TaskState> {
   void insertTask() async {
     emit(TaskInsertLoading());
     try {
-      await getIt<SqfliteHelper>().insertTask(TaskModel(
+      await getIt<SqfliteHelper>().insertTask(
+        TaskModel(
           title: titleController.text,
           note: noteController.text,
           starttime: startTime,
           endtime: endTime,
           isCompleted: 0,
           color: selectedColor,
-          date: DateFormat.yMd().format(curentDate)));
+          date: DateFormat.yMd().format(curentDate),
+        ),
+      );
+      LocalNotificationService.showSchduledNotification(
+        taskmodel: TaskModel(
+          title: titleController.text,
+          note: noteController.text,
+          starttime: startTime,
+          endtime: endTime,
+          isCompleted: 0,
+          color: selectedColor,
+          date: DateFormat.yMd().format(curentDate),
+        ),
+        currentdate: curentDate,
+        schduledTime: scheduledNotificationTime,
+      );
 
       titleController.clear();
       noteController.clear();
       emit(TaskInsertSuccess());
 
-      await getTasks();
+      getTasks();
     } on Exception catch (e) {
       emit(TaskInsertFaliur(e.toString()));
     }
   }
 
-  Future getTasks() async {
+  void getTasks() async {
     emit(TaskGetLoading());
-    try {
-      await getIt<SqfliteHelper>().getTasks().then(
-        (value) {
-          tasklist = value
-              .map((e) => TaskModel.fromjson(e))
-              .toList()
-              .where((element) =>
-                  element.date == DateFormat.yMd().format(selectedDate))
-              .toList();
-        },
-      );
-
+    await getIt<SqfliteHelper>().getTasks().then((value) {
+      tasklist =
+          value.map((e) => TaskModel.fromjson(e)).toList().where((element) {
+        return element.date == DateFormat.yMd().format(selectedDate);
+      }).toList();
+      log(tasklist.length.toString());
       emit(TaskGetSuccess());
-    } on Exception catch (e) {
+    }).catchError((e) {
+      print(e.toString());
       emit(TaskGetFaliur(e.toString()));
-    }
+    });
   }
 
   void updateTask({required int id}) async {
     emit(TaskUpdateLoading());
     try {
       await getIt<SqfliteHelper>().updateTask(id);
-      await getTasks();
+      getTasks();
       emit(TaskUpdateSuccess());
     } on Exception catch (e) {
       emit(TaskUpdateFaliur(e.toString()));
@@ -140,19 +158,19 @@ class TaskCubit extends Cubit<TaskState> {
     emit(TaskDeleteLoading());
     try {
       await getIt<SqfliteHelper>().deleteTask(id);
-      await getTasks();
+      getTasks();
       emit(TaskDeleteSuccess());
     } on Exception catch (e) {
       emit(TaskDeleteFaliur(e.toString()));
     }
   }
 
-  void getSelectedDate(date) async {
+  void getSelectedDate(date) {
     emit(TaskSelectedDateLoading());
     selectedDate = date;
 
     emit(TaskSelectedDateSuccess());
-    await getTasks();
+    getTasks();
   }
 
   bool isDark = false;
